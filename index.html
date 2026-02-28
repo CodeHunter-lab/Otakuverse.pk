@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OtakuVerse PK — Pakistan's #1 Anime Store</title>
+  <meta name="description" content="Pakistan's #1 Anime Merchandise Store. Action figures, t-shirts, hoodies, plushies. Cash on Delivery. Nationwide shipping.">
+
+  <!-- CSS: load in order — variables first, then everything else -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+  <!-- ── Custom Cursor ── -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ── Overlays ── -->
+  <div class="cart-overlay"   id="cart-overlay"   onclick="closeCart()"></div>
+  <div class="modal-overlay"  id="product-modal"  onclick="closeProductModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="checkout-modal" onclick="closeCheckout(event)">
+    <div class="checkout-modal">
+      <button class="modal-close" onclick="closeCheckout()" style="top:16px;right:16px">✕</button>
+      <div class="co-hdr">
+        <span class="eyebrow">Secure Checkout</span>
+        <h3>Your Order</h3>
+      </div>
+      <div class="co-body">
+        <div class="co-section-title">Delivery Information</div>
+        <div class="field-group">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Muhammad Ali">
+          </div>
+          <div class="field">
+            <label>Phone Number</label>
+            <input type="text" placeholder="0300-1234567">
+          </div>
+        </div>
+        <div class="field">
+          <label>Address</label>
+          <input type="text" placeholder="House #, Street, Area">
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <label>City</label>
+            <select>
+              <option>Karachi</option><option>Lahore</option>
+              <option>Islamabad</option><option>Rawalpindi</option>
+              <option>Faisalabad</option><option>Multan</option>
+              <option>Peshawar</option><option>Quetta</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Province</label>
+            <select>
+              <option>Sindh</option><option>Punjab</option>
+              <option>KPK</option><option>Balochistan</option>
+              <option>AJK</option><option>Gilgit-Baltistan</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="co-section-title">Payment Method</div>
+        <div class="pay-options">
+          <div class="pay-opt selected" onclick="selectPayment(this)">
+            <div class="pay-radio"></div>
+            <div>
+              <div class="pay-opt-lbl">Cash on Delivery (COD)</div>
+              <div class="pay-opt-desc">Pay when your order arrives</div>
+            </div>
+            <span class="pay-popular">POPULAR</span>
+          </div>
+          <div class="pay-opt" onclick="selectPayment(this)">
+            <div class="pay-radio"></div>
+            <div>
+              <div class="pay-opt-lbl">JazzCash</div>
+              <div class="pay-opt-desc">Pay via JazzCash mobile wallet</div>
+            </div>
+          </div>
+          <div class="pay-opt" onclick="selectPayment(this)">
+            <div class="pay-radio"></div>
+            <div>
+              <div class="pay-opt-lbl">EasyPaisa</div>
+              <div class="pay-opt-desc">Pay via EasyPaisa mobile wallet</div>
+            </div>
+          </div>
+          <div class="pay-opt" onclick="selectPayment(this)">
+            <div class="pay-radio"></div>
+            <div>
+              <div class="pay-opt-lbl">Bank Transfer</div>
+              <div class="pay-opt-desc">MCB / HBL / UBL direct transfer</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-wide" onclick="placeOrder()">
+          Place Order →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Cart Sidebar ── -->
+  <aside class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-hdr">
+      <h3>Cart 🛒</h3>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items-list" id="cart-items-list"></div>
+    <div class="cart-foot">
+      <div class="cart-coupon">
+        <input type="text" id="coupon-input" placeholder="Coupon code (e.g. ANIME10)">
+        <button class="coupon-btn" onclick="applyCoupon()">Apply</button>
+      </div>
+      <div class="cart-summary">
+        <div class="cart-row">
+          <span>Subtotal</span><span class="v" id="cart-subtotal">Rs. 0</span>
+        </div>
+        <div class="cart-row">
+          <span>Delivery</span><span class="v" id="cart-shipping">Rs. 200</span>
+        </div>
+        <div class="cart-row" id="cart-discount-row" style="display:none;color:var(--green)">
+          <span>Discount</span><span class="v" id="cart-discount">-Rs. 0</span>
+        </div>
+      </div>
+      <div class="cart-total-row">
+        <span class="cart-total-lbl">Total</span>
+        <span class="cart-total-val" id="cart-total">Rs. 0</span>
+      </div>
+      <button class="btn btn-primary btn-wide" onclick="openCheckout()" style="margin-top:12px">
+        Checkout →
+      </button>
+      <div class="cart-pay-methods">
+        <span class="cart-pay-chip">JazzCash</span>
+        <span class="cart-pay-chip">EasyPaisa</span>
+        <span class="cart-pay-chip">COD</span>
+        <span class="cart-pay-chip">Bank</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Mobile Drawer ── -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <div class="mobile-drawer"  id="mobile-drawer">
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    <div class="drawer-logo">
+      <span style="background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Otaku</span><span style="color:var(--text)">Verse</span>
+      <span style="font-size:13px;color:var(--muted);-webkit-text-fill-color:var(--muted)"> PK</span>
+    </div>
+    <div class="drawer-links">
+      <a href="#" onclick="filterByCategory('all');closeDrawer()">⚡ All Products</a>
+      <a href="#" onclick="filterByCategory('figures');closeDrawer()">⚔️ Action Figures</a>
+      <a href="#" onclick="filterByCategory('shirts');closeDrawer()">👕 T-Shirts</a>
+      <a href="#" onclick="filterByCategory('hoodies');closeDrawer()">🧥 Hoodies</a>
+      <a href="#" onclick="filterByCategory('plushies');closeDrawer()">🧸 Plushies</a>
+      <a href="#" onclick="filterByCategory('accessories');closeDrawer()">📿 Accessories</a>
+      <div class="drawer-divider"></div>
+      <a href="#" style="color:var(--gold)">🔥 Sale / Deals</a>
+      <a href="#">📦 Track My Order</a>
+      <a href="#">📞 Contact Us</a>
+    </div>
+  </div>
+
+  <!-- ── Toast Container ── -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ════════════════════════════════
+       PAGE CONTENT
+  ════════════════════════════════ -->
+
+  <!-- Announcement Bar -->
+  <div class="ann-bar">
+    ⚡ Free Delivery on Orders Above Rs. 2,000 · Cash on Delivery Nationwide · Use ANIME10 for 10% Off ⚡
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="logo-o">Otaku</span><span class="logo-v">Verse</span>
+      <span class="logo-pk">PK</span>
+    </a>
+
+    <ul class="nav-links">
+      <li>
+        <a href="#">Figures ▾</a>
+        <div class="nav-dropdown">
+          <a href="#" onclick="filterByCategory('figures');scrollToProducts()">⚔️ All Figures</a>
+          <a href="#" onclick="filterByCategory('figures');scrollToProducts()">🔴 Demon Slayer</a>
+          <a href="#" onclick="filterByCategory('figures');scrollToProducts()">⚡ Dragon Ball Z</a>
+          <a href="#" onclick="filterByCategory('figures');scrollToProducts()">🟠 Naruto</a>
+          <a href="#" onclick="filterByCategory('figures');scrollToProducts()">✨ Jujutsu Kaisen</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">Clothing ▾</a>
+        <div class="nav-dropdown">
+          <a href="#" onclick="filterByCategory('shirts');scrollToProducts()">👕 T-Shirts</a>
+          <a href="#" onclick="filterByCategory('hoodies');scrollToProducts()">🧥 Hoodies</a>
+          <a href="#">👘 Cosplay</a>
+          <a href="#">🧢 Caps & Hats</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">Accessories ▾</a>
+        <div class="nav-dropdown">
+          <a href="#" onclick="filterByCategory('accessories');scrollToProducts()">📿 All Accessories</a>
+          <a href="#">💍 Rings & Bracelets</a>
+          <a href="#">🎒 Bags & Backpacks</a>
+          <a href="#">📱 Phone Cases</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">Plushies ▾</a>
+        <div class="nav-dropdown">
+          <a href="#" onclick="filterByCategory('plushies');scrollToProducts()">🧸 All Plushies</a>
+          <a href="#">🦊 Naruto</a>
+          <a href="#">🐱 Demon Slayer</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="nav-hot" onclick="filterByCategory('sale');scrollToProducts()">🔥 Sale</a>
+      </li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="search-wrap" style="max-width:200px">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search..."
+               oninput="handleSearch(this.value)"
+               style="border-radius:var(--radius-pill);padding-left:36px">
+      </div>
+      <button class="nav-icon" onclick="openCart()">
+        🛒 <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="ham-btn" onclick="openDrawer()">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="hero-left">
+      <div class="hero-tag">
+        <span class="blink-dot"></span>
+        New Season — Now in Pakistan
+      </div>
+      <h1 class="hero-h1">
+        <span class="line">PAKISTAN'S</span>
+        <span class="line accent">#1 ANIME</span>
+        <span class="line">STORE</span>
+      </h1>
+      <p class="hero-p">
+        Officially licensed anime merchandise delivered nationwide.
+        Action figures, clothing, accessories — all with Cash on Delivery.
+        Lahore · Karachi · Islamabad & beyond.
+      </p>
+      <div class="hero-btns">
+        <button class="btn btn-primary" onclick="scrollToProducts()">Shop Now →</button>
+        <button class="btn btn-outline" onclick="filterByCategory('figures');scrollToProducts()">
+          Action Figures
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">5K+</div><div class="stat-lbl">Products</div></div>
+        <div><div class="stat-num">50K+</div><div class="stat-lbl">Customers</div></div>
+        <div><div class="stat-num">4.9★</div><div class="stat-lbl">Rating</div></div>
+        <div><div class="stat-num">COD</div><div class="stat-lbl">Available</div></div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-glow"></div>
+      <div class="hero-kanji">侍</div>
+      <div class="showcase-grid" id="showcase-grid"></div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marquee-track"></div>
+  </div>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar reveal">
+    <div class="trust-item">
+      <span class="trust-icon">🚚</span>
+      <div><div class="trust-title">Nationwide Delivery</div><div class="trust-sub">Lahore · Karachi · Islamabad +</div></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">💵</span>
+      <div><div class="trust-title">Cash on Delivery</div><div class="trust-sub">Pay when it arrives</div></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🔄</span>
+      <div><div class="trust-title">Easy Returns</div><div class="trust-sub">3–7 day hassle-free policy</div></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">⭐</span>
+      <div><div class="trust-title">Official Brands</div><div class="trust-sub">Bandai · Funko · Tamashii</div></div>
+    </div>
+  </div>
+
+  <!-- Category Grid -->
+  <section class="section reveal" id="categories-section">
+    <div class="sec-header">
+      <div>
+        <span class="eyebrow">Shop By Type</span>
+        <h2 class="sec-title">Browse <span class="hl">Categories</span></h2>
+      </div>
+      <button class="btn btn-outline" onclick="filterByCategory('all');scrollToProducts()">
+        View All →
+      </button>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="filterByCategory('figures');scrollToProducts()">
+        <span class="cat-icon">⚔️</span>
+        <span class="cat-name">Action Figures</span>
+        <span class="cat-count">8 items</span>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('shirts');scrollToProducts()">
+        <span class="cat-icon">👕</span>
+        <span class="cat-name">T-Shirts</span>
+        <span class="cat-count">8 items</span>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('hoodies');scrollToProducts()">
+        <span class="cat-icon">🧥</span>
+        <span class="cat-name">Hoodies</span>
+        <span class="cat-count">6 items</span>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('plushies');scrollToProducts()">
+        <span class="cat-icon">🧸</span>
+        <span class="cat-name">Plushies</span>
+        <span class="cat-count">6 items</span>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('accessories');scrollToProducts()">
+        <span class="cat-icon">📿</span>
+        <span class="cat-name">Accessories</span>
+        <span class="cat-count">6 items</span>
+      </div>
+      <div class="cat-card" onclick="filterByCategory('sale');scrollToProducts()">
+        <span class="cat-icon">🔥</span>
+        <span class="cat-name">Sale Items</span>
+        <span class="cat-count">Save up to 25%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banners -->
+  <div class="banners-grid reveal" style="margin-bottom:0">
+    <div class="banner-card banner-red">
+      <div class="banner-wm">MERCH</div>
+      <span class="banner-tag">Limited Drop</span>
+      <div class="banner-title">Demon Slayer<br>Official Collection</div>
+      <p class="banner-desc">Tanjiro, Nezuko, Rengoku — Bandai & Funko official figures. Limited stock in Pakistan.</p>
+      <button class="btn btn-primary" style="width:fit-content;margin-top:4px"
+              onclick="filterByCategory('figures');scrollToProducts()">
+        Shop Demon Slayer →
+      </button>
+    </div>
+    <div class="banner-card banner-blue">
+      <div class="banner-wm">COD</div>
+      <span class="banner-tag" style="background:var(--gold);color:#000">Cash on Delivery</span>
+      <div class="banner-title">Pay When<br>It Arrives</div>
+      <p class="banner-desc">No advance payment. Pay cash at your door — available everywhere in Pakistan.</p>
+      <button class="btn btn-outline" style="margin-top:6px">Learn More</button>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <section class="section" id="products-section">
+    <div class="sec-header reveal">
+      <div>
+        <span class="eyebrow">Amazon-Sourced · Delivered in Pakistan</span>
+        <h2 class="sec-title">🔥 <span class="hl">All Products</span></h2>
+      </div>
+      <div class="search-wrap" style="max-width:320px">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search series, brand..."
+               oninput="handleSearch(this.value)">
+      </div>
+    </div>
+
+    <!-- Category Chips -->
+    <div class="filter-chips reveal" id="chip-row"></div>
+
+    <!-- Filter Row -->
+    <div class="filter-row reveal">
+      <span class="filter-label">Price (Rs):</span>
+      <input class="filter-input" type="number" id="price-min" placeholder="Min" oninput="applyFilters()">
+      <span style="color:var(--muted)">–</span>
+      <input class="filter-input" type="number" id="price-max" placeholder="Max" oninput="applyFilters()">
+      <span class="filter-label" style="margin-left:10px">Sort:</span>
+      <select class="sort-select" id="sort-select" onchange="applyFilters()">
+        <option value="default">Default</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="rating">Best Rated</option>
+        <option value="reviews">Most Reviews</option>
+      </select>
+    </div>
+
+    <!-- Products Grid (rendered by products.js) -->
+    <div class="products-grid" id="products-grid"></div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+  </section>
+
+  <!-- Newsletter -->
+  <div class="newsletter reveal">
+    <div>
+      <span class="eyebrow">Stay Connected</span>
+      <h2>
+        Join the<br>
+        <span style="background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+          Otaku Clan
+        </span>
+      </h2>
+      <p>Exclusive early access, Pakistan-only deals and new anime drops — straight to your inbox. No spam, ever.</p>
+    </div>
+    <div>
+      <div class="nl-form">
+        <input class="nl-input" type="email" id="nl-email" placeholder="your@email.com">
+        <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <p style="font-size:11px;color:var(--muted);font-family:var(--font-body)">
+        🔒 We never spam. Unsubscribe anytime.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot-grid reveal">
+      <div>
+        <span class="foot-logo">OtakuVerse PK</span>
+        <p class="foot-about">Pakistan's #1 anime merchandise dropshipping store. Sourced from Bandai, Funko, Tamashii Nations & more. Nationwide delivery with Cash on Delivery.</p>
+        <div class="foot-contact">
+          <div>📧 <a href="mailto:info@otakuverse.pk">info@otakuverse.pk</a></div>
+          <div>📞 <a href="tel:+923001234567">0300-1234567</a></div>
+          <div>📍 Urdu Bazaar, Lahore, Pakistan</div>
+          <div>⏰ Mon–Sat: 10am–8pm PKT</div>
+        </div>
+      </div>
+      <div>
+        <div class="foot-hdr">Shop</div>
+        <ul class="foot-links">
+          <li><a href="#" onclick="filterByCategory('figures');scrollToProducts()">Action Figures</a></li>
+          <li><a href="#" onclick="filterByCategory('shirts');scrollToProducts()">Anime T-Shirts</a></li>
+          <li><a href="#" onclick="filterByCategory('hoodies');scrollToProducts()">Hoodies</a></li>
+          <li><a href="#" onclick="filterByCategory('plushies');scrollToProducts()">Plushies</a></li>
+          <li><a href="#" onclick="filterByCategory('accessories');scrollToProducts()">Accessories</a></li>
+          <li><a href="#" onclick="filterByCategory('sale');scrollToProducts()">Sale / Deals</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-hdr">By Series</div>
+        <ul class="foot-links">
+          <li><a href="#">Naruto / Shippuden</a></li>
+          <li><a href="#">Demon Slayer</a></li>
+          <li><a href="#">Jujutsu Kaisen</a></li>
+          <li><a href="#">One Piece</a></li>
+          <li><a href="#">Dragon Ball Z</a></li>
+          <li><a href="#">Attack on Titan</a></li>
+          <li><a href="#">My Hero Academia</a></li>
+          <li><a href="#">Bleach</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-hdr">Help</div>
+        <ul class="foot-links">
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">WhatsApp Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-hdr">Company</div>
+        <ul class="foot-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Affiliate Program</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-btm">
+      <div class="foot-copy">
+        © 2026 OtakuVerse PK. All Rights Reserved.
+        Products sourced via Amazon. Prices in PKR.
+      </div>
+      <div class="pay-chips">
+        <span class="pay-chip">JazzCash</span>
+        <span class="pay-chip">EasyPaisa</span>
+        <span class="pay-chip">COD</span>
+        <span class="pay-chip">HBL</span>
+        <span class="pay-chip">MCB</span>
+        <span class="pay-chip">UBL</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button id="scroll-top">↑</button>
+
+  <!-- ════════════════════════════════
+       SCRIPTS — data first, then logic
+  ════════════════════════════════ -->
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+
+</body>
+</html>

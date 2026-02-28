@@ -1,0 +1,22 @@
+/* =============================================
+   animations.css — All Keyframes
+   ============================================= */
+
+@keyframes fadeUp    { from{opacity:0;transform:translateY(18px);}  to{opacity:1;transform:translateY(0);} }
+@keyframes fadeIn    { from{opacity:0;}                              to{opacity:1;} }
+@keyframes slideLeft { from{opacity:0;transform:translateX(-36px);} to{opacity:1;transform:translateX(0);} }
+@keyframes slideRight{ from{opacity:0;transform:translateX(36px);}  to{opacity:1;transform:translateX(0);} }
+@keyframes cardIn    { from{opacity:0;transform:translateY(22px);}  to{opacity:1;transform:translateY(0);} }
+@keyframes modalIn   { from{opacity:0;transform:scale(.95) translateY(20px);} to{opacity:1;transform:scale(1) translateY(0);} }
+@keyframes cartItemIn{ from{opacity:0;transform:translateX(16px);} to{opacity:1;transform:translateX(0);} }
+@keyframes toastIn   { from{opacity:0;transform:translateX(-18px);} to{opacity:1;transform:translateX(0);} }
+@keyframes toastOut  { to{opacity:0;transform:translateX(-18px);} }
+@keyframes blink     { 0%,100%{opacity:1;} 50%{opacity:0;} }
+@keyframes marqueeRoll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+@keyframes annGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+@keyframes annShimmer  { 0%{left:-100%;} 100%{left:200%;} }
+@keyframes gradMove    { 0%,100%{background-position:0%;} 50%{background-position:100%;} }
+@keyframes kanjiSpin   { to{transform:translate(-50%,-50%) rotate(360deg);} }
+@keyframes glowPulse   { 0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1);} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.1);} }
+@keyframes floatCard   { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+@keyframes skeletonShimmer { from{background-position:200% 0;} to{background-position:-200% 0;} }
