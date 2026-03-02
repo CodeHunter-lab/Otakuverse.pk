@@ -616,7 +616,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
     <a class="drawer-link hot" href="#products" onclick="filterCat('sale');closeDrawer()">🔥 Sale</a>
   </div>
   <div class="drawer-contact">
-    <p>📞 <a href="tel:+923312288018">03312288018</a><br>
+    <p>✅ Cash on Delivery available<br>📞 <a href="tel:+923312288018">03312288018</a><br>
     💬 <a href="https://wa.me/923312288018" target="_blank">WhatsApp Us</a><br>
     📧 <a href="mailto:mohammadtanzeel7.level7@gmail.com">Email Us</a></p>
   </div>
@@ -762,7 +762,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
       <div class="foot-logo">OTAKU<span class="ac">VERSE</span></div>
       <p class="foot-about">Pakistan's #1 anime merchandise store. Officially licensed figures, clothing and accessories — delivered nationwide with Cash on Delivery.</p>
       <div class="foot-contact">
-        <p>📞 <a href="tel:+923312288018">03312288018</a><br>
+        <p>✅ Cash on Delivery available<br>📞 <a href="tel:+923312288018">03312288018</a><br>
         💬 <a href="https://wa.me/923312288018" target="_blank" style="color:var(--green)">WhatsApp: 03312288018</a><br>
         📧 <a href="mailto:mohammadtanzeel7.level7@gmail.com">mohammadtanzeel7.level7@gmail.com</a></p>
       </div>
@@ -803,20 +803,16 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
     <div>
       <div class="foot-h">Payment</div>
       <div class="foot-links">
-        <span class="foot-link">💵 Cash on Delivery</span>
-        <span class="foot-link">📱 JazzCash</span>
-        <span class="foot-link">📲 EasyPaisa</span>
-        <span class="foot-link">💳 Debit/Credit Card</span>
-        <span class="foot-link">🏦 Bank Transfer</span>
+        <span class="foot-link" style="color:var(--green)">✅ Cash on Delivery</span>
+        <a class="foot-link" href="https://wa.me/923312288018" target="_blank" style="color:#25d366">💬 WhatsApp Order</a>
       </div>
     </div>
   </div>
   <div class="foot-btm">
     <div class="foot-copy">© 2025 OtakuVerse PK. All rights reserved. Pakistan's #1 Anime Store.</div>
     <div class="foot-payments">
-      <span class="foot-pay">COD</span><span class="foot-pay">JazzCash</span>
-      <span class="foot-pay">EasyPaisa</span><span class="foot-pay">Visa</span>
-      <span class="foot-pay">Mastercard</span><span class="foot-pay">HBL</span>
+      <span class="foot-pay" style="color:var(--green)">✅ Cash on Delivery</span>
+      <span class="foot-pay">💬 WhatsApp</span>
     </div>
   </div>
 </footer>
@@ -887,8 +883,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
       <div class="c-row total"><span>Total</span><span class="c-val" id="c-total">Rs. 0</span></div>
     </div>
     <div class="pay-methods">
-      <span class="pay-chip">💵 COD</span><span class="pay-chip">📱 JazzCash</span>
-      <span class="pay-chip">📲 EasyPaisa</span><span class="pay-chip">💳 Card</span>
+      <span class="pay-chip" style="color:var(--green);border-color:rgba(34,197,94,.3)">✅ Cash on Delivery</span>
+      <span class="pay-chip">💬 WhatsApp Order</span>
     </div>
     <button class="btn-checkout" onclick="openCheckout()">Proceed to Checkout →</button>
   </div>
@@ -915,6 +911,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
           <div class="field"><label>Phone *</label><input type="text" id="co-phone" placeholder="03312288018"></div>
         </div>
         <div class="field"><label>Full Address *</label><input type="text" id="co-addr" placeholder="House No., Street, Area"></div>
+        <div class="field"><label>Email (for order confirmation)</label><input type="email" id="co-email" placeholder="your@email.com"></div>
         <div class="field-row">
           <div class="field"><label>City</label>
             <select id="co-city">
@@ -939,53 +936,21 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
     <div id="co-s2" style="display:none">
       <div class="co-hdr"><span class="eyebrow">Step 2 of 3</span><h3>Payment Method</h3></div>
       <div class="co-body">
-        <div class="pay-opts" id="pay-opts">
-          <div class="pay-opt active" onclick="selPay(this,'cod')">
-            <div class="pay-radio"></div>
-            <div><div class="pay-opt-label">💵 Cash on Delivery</div><div class="pay-opt-desc">Pay cash when your order arrives</div></div>
-            <span class="pay-popular">POPULAR</span>
+        <div style="background:rgba(34,197,94,.07);border:2px solid rgba(34,197,94,.3);border-radius:12px;padding:22px 20px;display:flex;gap:16px;align-items:center">
+          <span style="font-size:36px">💵</span>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:700;margin-bottom:5px;color:var(--text)">Cash on Delivery (COD)</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.9;font-family:var(--font-body)">Pay cash when your order arrives at your doorstep.<br>No advance payment. No risk. 100% safe.</div>
           </div>
-          <div class="pay-opt" onclick="selPay(this,'card')">
-            <div class="pay-radio"></div>
-            <div><div class="pay-opt-label">💳 Debit / Credit Card</div><div class="pay-opt-desc">Visa, Mastercard, UnionPay — Pakistani & international</div></div>
-          </div>
-          <div class="pay-opt" onclick="selPay(this,'jazzcash')">
-            <div class="pay-radio"></div>
-            <div><div class="pay-opt-label">📱 JazzCash</div><div class="pay-opt-desc">Send to 03312288018 via JazzCash app</div></div>
-          </div>
-          <div class="pay-opt" onclick="selPay(this,'easypaisa')">
-            <div class="pay-radio"></div>
-            <div><div class="pay-opt-label">📲 EasyPaisa</div><div class="pay-opt-desc">Send to 03312288018 via EasyPaisa</div></div>
-          </div>
-          <div class="pay-opt" onclick="selPay(this,'bank')">
-            <div class="pay-radio"></div>
-            <div><div class="pay-opt-label">🏦 Bank Transfer</div><div class="pay-opt-desc">MCB / HBL / UBL bank transfer</div></div>
-          </div>
+          <span style="background:var(--green);color:#000;font-size:9px;font-weight:800;letter-spacing:1px;padding:5px 10px;border-radius:5px;white-space:nowrap;flex-shrink:0">ONLY OPTION</span>
         </div>
-        <!-- Card fields -->
-        <div id="card-fields">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <span style="font-size:10px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase">Secure Entry</span>
-            <div class="card-brands"><span class="cb" id="cb-v">VISA</span><span class="cb" id="cb-m">MC</span><span class="cb" id="cb-u">UP</span></div>
-          </div>
-          <div class="field"><label>Card Number</label><input type="text" id="card-num" placeholder="0000  0000  0000  0000" maxlength="19" oninput="fmtCard(this)" style="letter-spacing:2px;font-family:monospace;font-size:15px"></div>
-          <div class="card-row">
-            <div class="field" style="grid-column:1/3"><label>Cardholder Name</label><input type="text" id="card-name" placeholder="Name on card"></div>
-            <div class="field"><label>Expiry</label><input type="text" id="card-exp" placeholder="MM/YY" maxlength="5" oninput="fmtExp(this)"></div>
-          </div>
-          <div class="field"><label>CVV</label><input type="password" id="card-cvv" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')"></div>
-          <div style="font-size:10px;color:var(--muted);margin-top:4px">🔒 Card details sent securely via WhatsApp for manual processing</div>
-        </div>
-        <!-- JazzCash instructions -->
-        <div id="jc-info" class="pay-sub"><strong>Send to: 03312288018</strong><br>Amount: <strong id="jc-amt">Rs. 0</strong><br>After sending, tap "Place Order" and WhatsApp us the receipt screenshot.</div>
-        <!-- EasyPaisa instructions -->
-        <div id="ep-info" class="pay-sub"><strong>Send to: 03312288018</strong><br>Amount: <strong id="ep-amt">Rs. 0</strong><br>Dial *786# or use EasyPaisa app. WhatsApp us the receipt screenshot.</div>
-        <!-- Bank instructions -->
-        <div id="bk-info" class="pay-sub">
-          Bank: <strong>MCB Bank</strong><br>
-          Account Title: <strong>OtakuVerse PK</strong><br>
-          Account No: <strong>03312288018-00</strong><br>
-          Amount: <strong id="bk-amt">Rs. 0</strong>
+        <div style="text-align:center;padding:8px 0 4px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:14px;font-family:var(--font-body)">Or skip the form and order directly via WhatsApp — we'll handle everything!</div>
+          <a href="https://wa.me/923312288018?text=Hi%20OtakuVerse%2C%20I%20want%20to%20place%20an%20order!" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:13px 28px;border-radius:8px;font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s"
+             onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">
+            💬 &nbsp;ORDER VIA WHATSAPP
+          </a>
         </div>
         <div class="co-actions">
           <button class="btn-back" onclick="goStep(1)">← Back</button>
@@ -993,7 +958,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:64px
         </div>
       </div>
     </div>
-    <!-- Step 3 -->
+<!-- Step 3 -->
     <div id="co-s3" style="display:none">
       <div class="co-hdr"><span class="eyebrow">Step 3 of 3</span><h3>Review Order</h3></div>
       <div class="co-body">
@@ -1347,6 +1312,16 @@ const SERIES_LIST = [
 /* ═══════════════════════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════════════════════ */
+/* ── EmailJS Config — fill these in after emailjs.com setup ──────────────
+   1. Go to emailjs.com → sign up free
+   2. Add Gmail service → copy Service ID below
+   3. Create template → copy Template ID below
+   4. Account → API Keys → copy Public Key below
+─────────────────────────────────────────────────────────────────────── */
+const EJS_PUBLIC_KEY   = '9DVkCUEiSrwrsM7vE';   // from emailjs.com → Account → API Keys
+const EJS_SERVICE_ID   = 'service_rk6lws9';   // from emailjs.com → Email Services
+const EJS_TEMPLATE_ID  = 'template_9zh5d0a';  // from emailjs.com → Email Templates
+
 let cart          = JSON.parse(localStorage.getItem('ov_cart')||'[]');
 let wishlist      = JSON.parse(localStorage.getItem('ov_wish')||'[]');
 let activeCat     = 'all';
@@ -1869,7 +1844,7 @@ function buildReview(){
   document.getElementById('rv-sub').textContent  =`Rs. ${sub.toLocaleString()}`;
   document.getElementById('rv-ship').textContent =ship===0?'FREE':`Rs. ${ship}`;
   document.getElementById('rv-total').textContent=`Rs. ${total.toLocaleString()}`;
-  const PAY_LABELS={cod:'Cash on Delivery',card:'Debit/Credit Card',jazzcash:'JazzCash',easypaisa:'EasyPaisa',bank:'Bank Transfer'};
+  const PAY_LABELS={cod:'Cash on Delivery (COD)'};
   const rd=document.getElementById('review-delivery');
   const name=document.getElementById('co-name')?.value||'';
   const phone=document.getElementById('co-phone')?.value||'';
@@ -1903,11 +1878,12 @@ function placeOrder(){
   const city     = document.getElementById('co-city')?.value || '';
   const prov     = document.getElementById('co-province')?.value || '';
   const notes    = document.getElementById('co-notes')?.value || '';
+  const custEmail = document.getElementById('co-email')?.value.trim() || '';
   const sub      = cart.reduce((s,i)=>s+i.price*i.qty,0);
   const ship     = sub>=2000?0:200;
   const disc     = Math.round(sub*discount);
   const total    = sub+ship-disc;
-  const PAY_LABELS={cod:'Cash on Delivery',card:'Debit/Credit Card',jazzcash:'JazzCash',easypaisa:'EasyPaisa',bank:'Bank Transfer'};
+  const PAY_LABELS={cod:'Cash on Delivery (COD)'};
   const payLabel = PAY_LABELS[payMethod]||'Cash on Delivery';
 
   const itemLines = cart.map(i=>
@@ -1943,8 +1919,8 @@ Sent from OtakuVerse.pk`
   // EmailJS
   try{
     if(typeof emailjs!=='undefined'){
-      emailjs.init({publicKey:'YOUR_PUBLIC_KEY'});
-      emailjs.send('service_otakuverse','template_order',{
+      emailjs.init({publicKey:EJS_PUBLIC_KEY});
+      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID,{
         to_email:'mohammadtanzeel7.level7@gmail.com',
         order_id:orderId,customer_name:name,customer_phone:phone,
         customer_addr:`${addr}, ${city}, ${prov}`,payment_method:payLabel,
@@ -1983,7 +1959,8 @@ Sent from OtakuVerse.pk`
       </a>
       <p class="success-note">
         Order ID: <strong style="color:var(--text)">${orderId}</strong><br>
-        📧 Notification: <strong style="color:var(--text)">mohammadtanzeel7.level7@gmail.com</strong><br>
+        ${custEmail ? '📧 Confirmation sent to <strong style="color:var(--text)">'+custEmail+'</strong><br>' : ''}
+        📧 Store notified: <strong style="color:var(--text)">mohammadtanzeel7.level7@gmail.com</strong><br>
         📞 Questions? Call / WhatsApp <strong style="color:var(--text)">03312288018</strong>
       </p>
       <button class="continue-btn" onclick="document.getElementById('checkout-modal').classList.remove('open');document.getElementById('checkout-modal').style='';document.body.style.overflow='';location.reload()">← Continue Shopping</button>
